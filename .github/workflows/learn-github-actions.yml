@@ -1,17 +1,6 @@
 name: learn-github-actions
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
-# jobs:
-#   check-bats-version:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v5
-#       - uses: actions/setup-node@v4
-#         with:
-#           node-version: "20"
-#       - run: npm install -g bats
-#       - run: bats -v
-
 jobs:
   changes:
     runs-on: ubuntu-latest
@@ -36,6 +25,7 @@ jobs:
     if: ${{ needs.changes.outputs.backend == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: echo "backend changed"
 
   frontend:
@@ -43,4 +33,5 @@ jobs:
     if: ${{ needs.changes.outputs.frontend == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - run: echo "frontend changed"
